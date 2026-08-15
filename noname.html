@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Una Galaxia Para Ti ⚽🌌</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#01020b;
+    font-family:Arial,sans-serif;
+    color:white;
+}
+
+/* =========================
+   ESTRELLAS
+========================= */
+
+#estrellas{
+    position:fixed;
+    inset:0;
+    z-index:0;
+}
+
+/* =========================
+   PLANETAS DEL FONDO
+========================= */
+
+.planetaFondo{
+    position:fixed;
+    border-radius:50%;
+    z-index:1;
+    opacity:.75;
+    pointer-events:none;
+}
+
+.planeta1{
+    width:95px;
+    height:95px;
+    left:7%;
+    top:15%;
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #ffd8b0,
+            #e17b62 45%,
+            #742d62 80%,
+            #190b35
+        );
+    box-shadow:0 0 35px #b94e9d;
+    animation:flotar1 7s ease-in-out infinite;
+}
+
+.planeta2{
+    width:65px;
+    height:65px;
+    right:12%;
+    top:12%;
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #d5ffff,
+            #4cc7d8 45%,
+            #2442a8 80%,
+            #081038
+        );
+    box-shadow:0 0 30px #47dfff;
+    animation:flotar2 9s ease-in-out infinite;
+}
+
+.planeta3{
+    width:120px;
+    height:120px;
+    right:5%;
+    bottom:12%;
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #fff1c7,
+            #e6a83d 35%,
+            #8c3d25 70%,
+            #240b18
+        );
+    box-shadow:0 0 45px #d87935;
+    animation:flotar3 8s ease-in-out infinite;
+}
+
+.planeta4{
+    width:55px;
+    height:55px;
+    left:13%;
+    bottom:16%;
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #d9d4ff,
+            #7767e8 50%,
+            #26165e
+        );
+    box-shadow:0 0 25px #7868ff;
+    animation:flotar1 6s ease-in-out infinite reverse;
+}
+
+.planeta2::after,
+.planeta3::after{
+    content:"";
+    position:absolute;
+    width:160%;
+    height:35%;
+    left:-30%;
+    top:35%;
+    border:2px solid rgba(255,255,255,.5);
+    border-radius:50%;
+    transform:rotate(-18deg);
+}
+
+/* =========================
+   CORAZÓN MARRÓN
+========================= */
+
+.corazonCafe{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    z-index:10;
+    font-size:55px;
+
+    text-shadow:
+        0 0 8px #d88a5b,
+        0 0 20px #a95732,
+        0 0 40px #6b351d,
+        0 0 70px #c4774c;
+
+    animation:latido 1.7s ease-in-out infinite;
+    user-select:none;
+}
+
+/* =========================
+   CORAZONES FLOTANDO
+========================= */
+
+.corazon{
+    position:fixed;
+    z-index:2;
+    pointer-events:none;
+    font-size:22px;
+    animation:subir 8s linear infinite;
+    opacity:.8;
+}
+
+.c1{left:10%;bottom:-30px;animation-delay:0s}
+.c2{left:25%;bottom:-30px;animation-delay:2s}
+.c3{left:50%;bottom:-30px;animation-delay:4s}
+.c4{left:70%;bottom:-30px;animation-delay:1s}
+.c5{left:88%;bottom:-30px;animation-delay:3s}
+.c6{left:40%;bottom:-30px;animation-delay:5s}
+
+/* =========================
+   UNIVERSO
+========================= */
+
+.universo{
+    position:absolute;
+    width:700px;
+    height:700px;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    z-index:5;
+}
+
+/* =========================
+   PLANETA CENTRAL
+========================= */
+
+.planetaCentral{
+    position:absolute;
+
+    width:215px;
+    height:215px;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 32% 25%,
+            #e4ffff 0%,
+            #62d7ff 18%,
+            #3975e8 42%,
+            #3927ad 68%,
+            #09062f 100%
+        );
+
+    box-shadow:
+        0 0 30px #66e5ff,
+        0 0 80px #2874ff,
+        0 0 150px #332cff;
+
+    animation:respirar 5s ease-in-out infinite;
+
+    z-index:5;
+}
+
+.planetaCentral::before{
+    content:"";
+    position:absolute;
+    width:110px;
+    height:35px;
+    left:35px;
+    top:65px;
+    border-radius:50%;
+    background:rgba(255,255,255,.18);
+    transform:rotate(-20deg);
+}
+
+.planetaCentral::after{
+    content:"";
+    position:absolute;
+    width:70px;
+    height:25px;
+    right:25px;
+    bottom:55px;
+    border-radius:50%;
+    background:rgba(255,255,255,.13);
+    transform:rotate(25deg);
+}
+
+/* =========================
+   BALÓN
+========================= */
+
+#balon{
+    position:absolute;
+
+    width:150px;
+    height:150px;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    z-index:20;
+
+    cursor:pointer;
+}
+
+.mitad{
+    position:absolute;
+    top:0;
+
+    width:75px;
+    height:150px;
+
+    background:
+        radial-gradient(
+            circle at 40% 30%,
+            white,
+            #dff7ff 25%,
+            #58caff 55%,
+            #263bd0 80%,
+            #080b3d
+        );
+
+    box-shadow:0 0 20px #66dcff;
+
+    transition:1.3s ease;
+}
+
+.izquierda{
+    left:0;
+    border-radius:75px 0 0 75px;
+}
+
+.derecha{
+    right:0;
+    border-radius:0 75px 75px 0;
+}
+
+.balonEmoji{
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:80px;
+
+    z-index:3;
+
+    pointer-events:none;
+
+    transition:.5s;
+}
+
+.abierto .izquierda{
+    transform:
+        translateX(-125px)
+        rotate(-16deg);
+}
+
+.abierto .derecha{
+    transform:
+        translateX(125px)
+        rotate(16deg);
+}
+
+.abierto .balonEmoji{
+    opacity:0;
+    transform:scale(1.5);
+}
+
+/* =========================
+   ÓRBITAS
+========================= */
+
+.orbita{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    border:1px solid rgba(100,220,255,.28);
+
+    border-radius:50%;
+
+    transform-style:preserve-3d;
+}
+
+.o1{
+    width:300px;
+    height:150px;
+    margin-left:-150px;
+    margin-top:-75px;
+    animation:girar1 7s linear infinite;
+}
+
+.o2{
+    width:420px;
+    height:210px;
+    margin-left:-210px;
+    margin-top:-105px;
+    animation:girar2 10s linear infinite reverse;
+}
+
+.o3{
+    width:540px;
+    height:270px;
+    margin-left:-270px;
+    margin-top:-135px;
+    animation:girar3 14s linear infinite;
+}
+
+.o4{
+    width:660px;
+    height:330px;
+    margin-left:-330px;
+    margin-top:-165px;
+    animation:girar4 19s linear infinite reverse;
+}
+
+/* =========================
+   PALABRAS MOTIVADORAS
+========================= */
+
+.palabra{
+    position:absolute;
+
+    padding:8px 13px;
+
+    border-radius:20px;
+
+    background:rgba(5,10,40,.82);
+
+    border:1px solid #65dfff;
+
+    box-shadow:
+        0 0 12px rgba(60,190,255,.65);
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    white-space:nowrap;
+
+    animation:pulsar 2s ease-in-out infinite;
+}
+
+.p1{top:-18px;left:15px}
+.p2{right:-25px;top:25px}
+.p3{bottom:-18px;left:20px}
+.p4{left:-35px;bottom:25px}
+.p5{top:20px;left:45%}
+.p6{right:5%;bottom:20px}
+.p7{left:5%;top:45%}
+.p8{right:10%;top:50%}
+
+/* =========================
+   MENSAJE MÁS PEQUEÑO
+========================= */
+
+#mensaje{
+    position:fixed;
+    inset:0;
+    z-index:100;
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;
+
+    background:rgba(1,2,15,.70);
+}
+
+.carta{
+    position:relative;
+
+    width:min(500px,85%);
+
+    max-height:80vh;
+
+    overflow-y:auto;
+
+    padding:25px 22px;
+
+    border-radius:25px;
+
+    text-align:center;
+
+    background:rgba(5,9,40,.96);
+
+    border:1px solid #72e2ff;
+
+    box-shadow:
+        0 0 35px #286dff,
+        0 0 70px #342cff;
+}
+
+.cerrar{
+    position:absolute;
+
+    right:12px;
+    top:8px;
+
+    font-size:24px;
+
+    color:#8eeaff;
+
+    cursor:pointer;
+}
+
+.carta h1{
+    font-size:clamp(24px,6vw,38px);
+
+    margin:5px 0 15px;
+}
+
+.carta p{
+    font-size:15px;
+
+    line-height:1.5;
+
+    margin:10px 0;
+}
+
+/* =========================
+   ANIMACIONES
+========================= */
+
+@keyframes girar1{
+    from{
+        transform:rotate(0deg) rotateX(15deg);
+    }
+    to{
+        transform:rotate(360deg) rotateX(15deg);
+    }
+}
+
+@keyframes girar2{
+    from{
+        transform:rotate(360deg) rotateX(20deg);
+    }
+    to{
+        transform:rotate(0deg) rotateX(20deg);
+    }
+}
+
+@keyframes girar3{
+    from{
+        transform:rotate(0deg) rotateX(10deg);
+    }
+    to{
+        transform:rotate(360deg) rotateX(10deg);
+    }
+}
+
+@keyframes girar4{
+    from{
+        transform:rotate(360deg) rotateX(15deg);
+    }
+    to{
+        transform:rotate(0deg) rotateX(15deg);
+    }
+}
+
+@keyframes respirar{
+    0%,100%{
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+    }
+
+    50%{
+        transform:
+            translate(-50%,-50%)
+            scale(1.04);
+    }
+}
+
+@keyframes pulsar{
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.08);
+    }
+}
+
+@keyframes latido{
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.18);
+    }
+}
+
+@keyframes subir{
+    0%{
+        transform:
+            translateY(0)
+            rotate(0deg);
+        opacity:0;
+    }
+
+    15%{
+        opacity:.8;
+    }
+
+    100%{
+        transform:
+            translateY(-110vh)
+            rotate(30deg);
+        opacity:0;
+    }
+}
+
+@keyframes flotar1{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-25px);
+    }
+}
+
+@keyframes flotar2{
+    0%,100%{
+        transform:translate(0,0);
+    }
+
+    50%{
+        transform:translate(-20px,25px);
+    }
+}
+
+@keyframes flotar3{
+    0%,100%{
+        transform:translate(0,0);
+    }
+
+    50%{
+        transform:translate(20px,-20px);
+    }
+}
+
+/* =========================
+   MÓVIL
+========================= */
+
+@media(max-width:600px){
+
+    .universo{
+        width:95vw;
+        height:95vw;
+    }
+
+    .planetaCentral{
+        width:170px;
+        height:170px;
+    }
+
+    #balon{
+        width:120px;
+        height:120px;
+    }
+
+    .mitad{
+        width:60px;
+        height:120px;
+    }
+
+    .balonEmoji{
+        font-size:63px;
+    }
+
+    .palabra{
+        font-size:9px;
+        padding:6px 9px;
+    }
+
+    .planeta1{
+        width:60px;
+        height:60px;
+    }
+
+    .planeta2{
+        width:45px;
+        height:45px;
+    }
+
+    .planeta3{
+        width:75px;
+        height:75px;
+    }
+
+    .planeta4{
+        width:40px;
+        height:40px;
+    }
+
+    .corazonCafe{
+        font-size:42px;
+        right:15px;
+        bottom:15px;
+    }
+
+    .carta{
+        width:88%;
+        max-height:75vh;
+        padding:22px 18px;
+    }
+
+    .carta h1{
+        font-size:27px;
+    }
+
+    .carta p{
+        font-size:14px;
+        line-height:1.45;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ESTRELLAS -->
+<canvas id="estrellas"></canvas>
+
+<!-- PLANETAS DEL FONDO -->
+<div class="planetaFondo planeta1"></div>
+<div class="planetaFondo planeta2"></div>
+<div class="planetaFondo planeta3"></div>
+<div class="planetaFondo planeta4"></div>
+
+<!-- CORAZONES -->
+<div class="corazon c1">💗</div>
+<div class="corazon c2">💖</div>
+<div class="corazon c3">💕</div>
+<div class="corazon c4">💞</div>
+<div class="corazon c5">💓</div>
+<div class="corazon c6">💗</div>
+
+<!-- CORAZÓN MARRÓN -->
+<div class="corazonCafe">🤎</div>
+
+
+<!-- UNIVERSO -->
+<div class="universo">
+
+    <!-- PLANETA CENTRAL -->
+    <div class="planetaCentral"></div>
+
+
+    <!-- ÓRBITA 1 -->
+    <div class="orbita o1">
+
+        <div class="palabra p1">FE</div>
+        <div class="palabra p2">FUERZA</div>
+        <div class="palabra p3">VALENTÍA</div>
+        <div class="palabra p4">TALENTO</div>
+
+    </div>
+
+
+    <!-- ÓRBITA 2 -->
+    <div class="orbita o2">
+
+        <div class="palabra p1">SUEÑOS</div>
+        <div class="palabra p2">PASIÓN</div>
+        <div class="palabra p3">DISCIPLINA</div>
+        <div class="palabra p4">ESFUERZO</div>
+
+    </div>
+
+
+    <!-- ÓRBITA 3 -->
+    <div class="orbita o3">
+
+        <div class="palabra p1">CONFIANZA</div>
+        <div class="palabra p2">CORAJE</div>
+        <div class="palabra p3">ÉXITO</div>
+        <div class="palabra p4">LUCHA</div>
+        <div class="palabra p5">FOCO</div>
+        <div class="palabra p6">PASO</div>
+
+    </div>
+
+
+    <!-- ÓRBITA 4 -->
+    <div class="orbita o4">
+
+        <div class="palabra p1">CRECER</div>
+        <div class="palabra p2">BRILLAR</div>
+        <div class="palabra p3">GANAR</div>
+        <div class="palabra p4">CREER</div>
+        <div class="palabra p5">CONSTANCIA</div>
+        <div class="palabra p6">GLORIA</div>
+        <div class="palabra p7">CAMPEONA</div>
+        <div class="palabra p8">FUTURO</div>
+
+    </div>
+
+
+    <!-- BALÓN -->
+    <div id="balon">
+
+        <div class="mitad izquierda"></div>
+
+        <div class="mitad derecha"></div>
+
+        <div class="balonEmoji">
+            ⚽
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- MENSAJE -->
+
+<div id="mensaje">
+
+    <div class="carta">
+
+        <div
+            class="cerrar"
+            onclick="cerrarMensaje()">
+            ✕
+        </div>
+
+        <h1>
+            🌌 Galaxia desbloqueada ⚽
+        </h1>
+
+        <p>
+            Esta galaxia es un pequeño recordatorio
+            de lo increíble que puede ser alguien
+            cuando decide luchar por sus sueños. ✨
+        </p>
+
+        <p>
+            Sigue entrenando, sigue creyendo en ti
+            y disfruta cada momento dentro de la cancha.
+        </p>
+
+        <p>
+            <b>
+                Para mí, eres una futbolista increíble.
+                Nunca dejes de luchar por aquello que
+                quieres, porque tienes muchísimo
+                por conquistar.
+            </b>
+        </p>
+
+        <p>
+            ❤️ Nunca dejes de creer en ti.
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   ESTRELLAS
+========================= */
+
+const canvas =
+    document.getElementById("estrellas");
+
+const ctx =
+    canvas.getContext("2d");
+
+let estrellas=[];
+
+function crearEstrellas(){
+
+    canvas.width=innerWidth;
+    canvas.height=innerHeight;
+
+    estrellas=[];
+
+    for(let i=0;i<450;i++){
+
+        estrellas.push({
+
+            x:Math.random()*innerWidth,
+
+            y:Math.random()*innerHeight,
+
+            r:Math.random()*1.5,
+
+            brillo:Math.random()*6
+
+        });
+
+    }
+}
+
+crearEstrellas();
+
+window.addEventListener(
+    "resize",
+    crearEstrellas
+);
+
+function animarEstrellas(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    estrellas.forEach(e=>{
+
+        e.brillo+=.02;
+
+        ctx.globalAlpha=
+            .25+
+            Math.sin(e.brillo)*.3;
+
+        ctx.beginPath();
+
+        ctx.arc(
+            e.x,
+            e.y,
+            e.r,
+            0,
+            Math.PI*2
+        );
+
+        ctx.fillStyle="white";
+
+        ctx.fill();
+
+    });
+
+    requestAnimationFrame(
+        animarEstrellas
+    );
+}
+
+animarEstrellas();
+
+
+/* =========================
+   BALÓN
+========================= */
+
+let toques=0;
+
+const balon =
+    document.getElementById("balon");
+
+balon.addEventListener(
+    "click",
+    abrirBalon
+);
+
+function abrirBalon(){
+
+    toques++;
+
+    balon.animate(
+
+        [
+            {
+                transform:
+                "translate(-50%,-50%) scale(1)"
+            },
+
+            {
+                transform:
+                "translate(-50%,-50%) scale(1.2)"
+            },
+
+            {
+                transform:
+                "translate(-50%,-50%) scale(1)"
+            }
+        ],
+
+        {
+            duration:350
+        }
+
+    );
+
+
+    /* TERCER TOQUE */
+
+    if(toques===3){
+
+        balon.classList.add(
+            "abierto"
+        );
+
+        setTimeout(()=>{
+
+            document.getElementById(
+                "mensaje"
+            ).style.display="flex";
+
+        },2500);
+
+    }
+
+}
+
+
+/* =========================
+   CERRAR MENSAJE
+========================= */
+
+function cerrarMensaje(){
+
+    document.getElementById(
+        "mensaje"
+    ).style.display="none";
+
+}
+
+</script>
+
+</body>
+</html>
